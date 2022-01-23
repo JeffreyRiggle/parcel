@@ -22,12 +22,12 @@ yarn-error.log
 
 # Miscellaneous
 /parcel-client/.angular/cache
-.sass-cache/
-connect.lock
-coverage
-libpeerconnection.log
-testem.log
-typings
+/parcel-client/.sass-cache/
+/parcel-client/connect.lock
+/parcel-client/coverage
+/parcel-client/libpeerconnection.log
+/parcel-client/testem.log
+/parcel-client/typings
 
 # System files
 .DS_Store
