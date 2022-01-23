@@ -1,0 +1,14 @@
+<div class="login-form">
+    <div class="login-section">
+        <label for="userName" class="login-label">User Name</label>
+        <input type="text" name="userName" [(ngModel)]="userName" />
+    </div>
+    <div class="login-section">
+        <label for="password" class="login-label">Password</label>
+        <input type="password" name="password" [(ngModel)]="password" />
+    </div>
+    <div class="login-section">
+        <button (click)="attemptLogin()">Login</button>
+    </div>
+    <div *ngIf="loginPending">Logging in</div>
+</div>
