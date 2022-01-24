@@ -10,6 +10,6 @@
     <div class="login-section">
         <button (click)="attemptLogin()">Login</button>
     </div>
-    <div *ngIf="loginPending">Logging in</div>
+    <div *ngIf="loginPending" class="login-pending">Logging in</div>
     <div *ngIf="hasError" class="login-failed">Failed to login</div>
 </div>
