@@ -11,4 +11,5 @@
         <button (click)="attemptLogin()">Login</button>
     </div>
     <div *ngIf="loginPending">Logging in</div>
+    <div *ngIf="hasError" class="login-failed">Failed to login</div>
 </div>

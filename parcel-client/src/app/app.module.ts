@@ -9,6 +9,9 @@ import { LoginPageComponent } from './pages/loginPage.component';
 
 import { StoreModule } from '@ngrx/store';
 import { loginReducer } from './data/reducers/login.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { LoginEffects } from './data/effects/login.effects';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,9 @@ import { loginReducer } from './data/reducers/login.reducer';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    StoreModule.forRoot({ login: loginReducer })
+    HttpClientModule,
+    StoreModule.forRoot({ login: loginReducer }),
+    EffectsModule.forRoot([LoginEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -13,14 +13,18 @@ export class LoginFormComponent implements OnDestroy {
   public userName: string;
   public password: string;
   public loginPending: boolean;
+  public hasError: boolean;
   private loginSubscription: Subscription;
 
   constructor(private store: Store<{ login: LoginState}>) {
     this.password = '';
     this.userName = '';
     this.loginPending = false;
+    this.hasError = false;
+  
     this.loginSubscription = store.select('login').subscribe((login: LoginState) => {
       this.loginPending = login.loginPending;
+      this.hasError = login.error;
     });
   }
 
