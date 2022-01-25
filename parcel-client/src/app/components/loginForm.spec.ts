@@ -23,7 +23,7 @@ describe('AppComponent', () => {
 
     fixture = TestBed.createComponent(LoginFormComponent);
     loginForm = fixture.componentInstance;
-    store = TestBed.get(Store);
+    store = TestBed.inject(Store) as MockStore<{ login: LoginState }>;
     spyOn(store, 'dispatch').and.callThrough();
   });
 
