@@ -4,10 +4,10 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable, of } from 'rxjs';
 import { LoginService } from 'src/app/services/login.service';
 import { LoginEffects } from './login.effects';
-import { login, LoginFormLoginActionType } from '../actions/login.actions';
+import { login } from '../actions/login.actions';
 
 class MockLoginService {
-    login = jasmine.createSpy('login').and.callFake(() => Promise.resolve())
+    login = jasmine.createSpy('login').and.callFake(() => of(true))
 }
 
 describe('login effects', () => {
@@ -33,10 +33,11 @@ describe('login effects', () => {
 
     describe('when effect is triggered', () => {
         let result: any;
-        beforeEach(() => {
+        beforeEach((done) => {
             actions = of(login({ userName: 'foo', password: 'bar' }));
             effects.login.subscribe(res => {
                 result = res;
+                done();
             });
         });
 
