@@ -7,8 +7,9 @@
         <label for="password" class="login-label">Password</label>
         <input type="password" name="password" [(ngModel)]="password" />
     </div>
-    <div class="login-section">
+    <div class="submit-area">
         <button (click)="attemptLogin()">Login</button>
+        <a routerLink="/create-account">Create Account</a>
     </div>
     <div *ngIf="loginPending" class="login-pending">Logging in</div>
     <div *ngIf="hasError" class="login-failed">Failed to login</div>

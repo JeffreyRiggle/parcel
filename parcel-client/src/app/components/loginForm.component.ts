@@ -33,6 +33,6 @@ export class LoginFormComponent implements OnDestroy {
   }
 
   public attemptLogin() {
-    this.store.dispatch(login({ password: this.password, userName: this.userName }))
+    this.store.dispatch(login({ password: this.password, userName: this.userName }));
   }
 }

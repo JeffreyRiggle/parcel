@@ -12,7 +12,6 @@
     justify-content: space-between;
 
     .login-section {
-        flex: 1 1 auto;
         padding: 16px 0;
         display: flex;
 
@@ -20,6 +19,13 @@
             font-size: 24px;
             margin-right: 8px;
         }
+    }
+
+    .submit-area {
+        display: flex;
+        min-width: 25%;
+        justify-content: space-between;
+        padding-bottom: 8px;
     }
 
     .login-failed {
