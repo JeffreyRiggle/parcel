@@ -32,3 +32,45 @@ yarn-error.log
 # System files
 .DS_Store
 Thumbs.db
+
+# IDE Support
+.vscode
+
+# CSharp
+parcel-server/*.swp
+parcel-server/*.*~
+parcel-server/project.lock.json
+parcel-server/.DS_Store
+parcel-server/*.pyc
+parcel-server/nupkg/
+
+# Visual Studio Code
+parcel-server/.vscode
+
+# Rider
+parcel-server/.idea
+
+# User-specific files
+parcel-server/*.suo
+parcel-server/*.user
+parcel-server/*.userosscache
+parcel-server/*.sln.docstates
+
+# Build results
+parcel-server/[Dd]ebug/
+parcel-server/[Dd]ebugPublic/
+parcel-server/[Rr]elease/
+parcel-server/[Rr]eleases/
+parcel-server/x64/
+parcel-server/x86/
+parcel-server/build/
+parcel-server/bld/
+parcel-server/[Bb]in/
+parcel-server/[Oo]bj/
+parcel-server/[Oo]ut/
+parcel-server/msbuild.log
+parcel-server/msbuild.err
+parcel-server/msbuild.wrn
+
+# Visual Studio 2015
+parcel-server/.vs/
