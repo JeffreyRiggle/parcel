@@ -7,7 +7,7 @@ namespace parcel_server.Controllers;
 public class AccountController : ControllerBase
 {
     private readonly ILogger<AccountController> _logger;
-    private readonly UserAccountDAO _dao;
+    private readonly IUserAccountDAO _dao;
 
 
     public AccountController(ILogger<AccountController> logger)

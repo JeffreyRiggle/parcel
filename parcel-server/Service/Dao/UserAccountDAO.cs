@@ -1,9 +1,9 @@
 namespace parcel_server;
 
-public class UserAccountDAO
+public class UserAccountDAO : IUserAccountDAO
 {
     private static Object _lockObj = new object();
-    private static UserAccountDAO? _instance;
+    private static IUserAccountDAO? _instance;
     private IList<UserAccount> _accounts;
 
     public UserAccountDAO()
@@ -11,7 +11,7 @@ public class UserAccountDAO
         _accounts = new List<UserAccount>();
     }
 
-    public static UserAccountDAO getInstance()
+    public static IUserAccountDAO getInstance()
     {
         if (_instance != null)
         {
