@@ -34,7 +34,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Setup .Net Core
-        uses: actions/setup-dotnet@1.7.2
+        uses: actions/setup-dotnet@v1.7.2
         with:
           dotnet-version: 6.0.x
       
