@@ -25,3 +25,27 @@ jobs:
     - name: Test
       working-directory: parcel-client
       run: npm run test:ci
+  
+  build-dotnet:
+    name: build-dotnet
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup .Net Core
+        uses: actions/setup-dotnet@1.7.2
+        with:
+          dotnet-version: 6.0.x
+      
+      - name: Install
+        working-directory: parcel-server
+        run: dotnet restore
+
+      - name: Build
+        working-directory: parcel-server
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Test
+        working-directory: parcel-server
+        run: dotnet test --no-restore --verbosity normal
