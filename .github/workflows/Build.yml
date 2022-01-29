@@ -1,0 +1,27 @@
+name: Build
+on: [push, pull_request]
+jobs:
+  build-js:
+    name: build-js
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+
+    - name: Checkout code
+      uses: actions/checkout@v1
+
+    - name: Install
+      working-directory: parcel-client
+      run: npm ci
+
+    - name: Build
+      working-directory: parcel-client
+      run: npm run build
+    
+    - name: Test
+      working-directory: parcel-client
+      run: npm run test:ci
