@@ -1,0 +1,33 @@
+.account-form {
+    position: fixed;
+    left: 25%;
+    top: 25%;
+    border: 1 solid black;
+    background-color: #cdcdcd;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    .account-section {
+        padding: 16px 0;
+        display: flex;
+
+        .account-label {
+            font-size: 24px;
+            margin-right: 8px;
+        }
+    }
+
+    .submit-area {
+        display: flex;
+        min-width: 25%;
+        justify-content: space-between;
+        padding-bottom: 8px;
+    }
+
+    .account-creation-failed {
+        color: red;
+    }
+}

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { createAccount } from '../data/actions/account.actions';
 import { AccountState } from '../data/reducers/account.reducer';
 
@@ -8,7 +9,7 @@ import { AccountState } from '../data/reducers/account.reducer';
   templateUrl: './createAccount.component.html',
   styleUrls: ['./createAccount.component.scss']
 })
-export class CreateAccountComponent {
+export class CreateAccountComponent implements OnDestroy {
   public userName: string = '';
   public firstName: string = '';
   public lastName: string = '';
@@ -16,8 +17,17 @@ export class CreateAccountComponent {
   public email: string = '';
   public password: string = '';
   public confirmPassword: string = '';
+  public hasError: boolean = false;
+  private accountSubscription: Subscription;
 
-  constructor(private store: Store<{ login: AccountState}>) {}
+  constructor(private store: Store<{ account: AccountState}>) {
+    this.accountSubscription = store.select('account').subscribe((account: AccountState) => {
+      this.hasError = account.error;
+    });
+  }
+  ngOnDestroy(): void {
+    this.accountSubscription.unsubscribe();
+  }
 
   public createAccount() {
     this.store.dispatch(createAccount({
