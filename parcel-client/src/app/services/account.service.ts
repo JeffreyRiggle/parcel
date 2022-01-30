@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
+import { CreateAccountAction } from "../data/actions/account.actions";
 
 @Injectable({
     providedIn: 'root'
@@ -7,8 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class AccountService {
     constructor(private http: HttpClient) {}
 
-    createAccount() {
-        // hack for now
-        return this.http.post('/api/v1/account', {});
+    createAccount(account: CreateAccountAction) {
+        return this.http.post('/api/account', account);
     }
 }

@@ -13,7 +13,14 @@ export class AccountEffects {
     
     createAccount = createEffect(() => this.actions.pipe(
         ofType(CreateAccountActionType),
-        mergeMap(() => this.accountService.createAccount().pipe(
+        mergeMap((action: any) => this.accountService.createAccount({
+            userName: action.userName,
+            firstName: action.firstName,
+            lastName: action.lastName,
+            gender: action.gender,
+            email: action.email,
+            password: action.password,
+        }).pipe(
             map(result => ({ type: CreateAccountAPISuccessActionType })),
             catchError(() => of({ type: CreateAccountAPIFailedActionType }))
         ))

@@ -1,4 +1,5 @@
 import { HttpClient } from "@angular/common/http";
+import { CreateAccountAction } from "../data/actions/account.actions";
 import { AccountService } from "./account.service";
 
 describe('account service', () => {
@@ -13,12 +14,21 @@ describe('account service', () => {
     });
 
     describe('when create request is made', () => {
+        const account: CreateAccountAction = {
+            userName: 'foobar',
+            firstName: 'foo',
+            lastName: 'bar',
+            email: 'a@b.c',
+            gender: 'o',
+            password: '1'
+        };
+
         beforeEach(() => {
-            service.createAccount();
+            service.createAccount(account);
         });
 
         it('should hit the correct endpoint', () => {
-            expect(postMock).toHaveBeenCalledWith('/api/v1/account', jasmine.any(Object));
+            expect(postMock).toHaveBeenCalledWith('/api/account', account);
         });
     });
 });
