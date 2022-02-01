@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace parcel_server.Controllers;
+namespace ParcelServer.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

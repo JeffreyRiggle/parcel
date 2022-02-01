@@ -6,7 +6,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-new parcel_server.ServiceRegistration().registerServices(builder.Services);
+new ParcelServer.ServiceRegistration().registerServices(builder.Services);
 
 var app = builder.Build();
 

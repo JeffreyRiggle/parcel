@@ -1,5 +1,5 @@
 using Xunit;
-using parcel_server;
+using ParcelServer;
 
 namespace Service.Tests
 {

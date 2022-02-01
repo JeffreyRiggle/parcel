@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using Xunit;
 using Moq;
-using parcel_server;
-using parcel_server.Controllers;
+using ParcelServer;
+using ParcelServer.Controllers;
 
 namespace Service.Tests
 {

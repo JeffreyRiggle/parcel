@@ -1,4 +1,4 @@
-namespace parcel_server;
+namespace ParcelServer;
 
 public class UserAccountRequest
 {
