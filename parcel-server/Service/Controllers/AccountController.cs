@@ -10,15 +10,24 @@ public class AccountController : ControllerBase
     private readonly IUserAccountDAO _dao;
 
 
-    public AccountController(ILogger<AccountController> logger)
+    public AccountController(ILogger<AccountController> logger, IUserAccountDAO dao)
     {
         _logger = logger;
-        _dao = UserAccountDAO.getInstance();
+        _dao = dao;
     }
 
     [HttpPost]
-    public UserAccount CreateAccount(UserAccountRequest request)
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public ActionResult<UserAccount> CreateAccount(UserAccountRequest request)
     {
-        return _dao.addAccount(request);
+        try
+        {
+            return _dao.addAccount(request);
+        }
+        catch (ObjectAlreadyExistsException e)
+        {
+            return BadRequest(new { error = e.Message, errorCode = 1 });
+        }
     }
 }

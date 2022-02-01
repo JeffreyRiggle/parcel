@@ -47,7 +47,7 @@ public class UserAccountDAO : IUserAccountDAO
     {
         if (!canCreateAccount(account))
         {
-            throw new Exception("Invalid Request");
+            throw new ObjectAlreadyExistsException(account.UserName);
         }
 
         var creationTime = DateTime.Now;
