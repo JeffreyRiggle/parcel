@@ -1,4 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { createAccount } from '../data/actions/account.actions';
@@ -20,9 +21,12 @@ export class CreateAccountComponent implements OnDestroy {
   public hasError: boolean = false;
   private accountSubscription: Subscription;
 
-  constructor(private store: Store<{ account: AccountState}>) {
+  constructor(private store: Store<{ account: AccountState}>, private router: Router) {
     this.accountSubscription = store.select('account').subscribe((account: AccountState) => {
       this.hasError = account.error;
+      if (account.accountCreated) {
+        this.router.navigate(['']);
+      }
     });
   }
   ngOnDestroy(): void {

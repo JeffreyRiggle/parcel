@@ -16,6 +16,7 @@ import { CreateAccountPageComponent } from './pages/createAccountPage.component'
 import { CreateAccountComponent } from './components/createAccount.component';
 import { accountReducer } from './data/reducers/account.reducer';
 import { AccountEffects } from './data/effects/account.effects';
+import { HomePageComponent } from './pages/homePage.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { AccountEffects } from './data/effects/account.effects';
     LoginPageComponent,
     CreateAccountPageComponent,
     CreateAccountComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,
