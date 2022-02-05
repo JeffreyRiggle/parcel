@@ -2,22 +2,28 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoginFormComponent } from './loginForm.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { LoginState } from '../data/reducers/login.reducer';
-import { login, LoginFormLoginActionType } from '../data/actions/login.actions';
+import { login, LoginFormLoginActionType, loginSuccess } from '../data/actions/login.actions';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<LoginFormComponent>;
   let loginForm: LoginFormComponent;
+  let router: Router;
   let store: MockStore<{ login: LoginState }>;
-  const initialState = { login: { loginPending: false, error: false } };
+  const initialState = { login: { loginPending: false, error: false, success: false } };
 
   beforeEach(async () => {
+    router = {
+      navigate: () => {},
+    } as any;
     await TestBed.configureTestingModule({
       declarations: [
         LoginFormComponent
       ],
       providers: [
-          provideMockStore({ initialState })
+          provideMockStore({ initialState }),
+          { provide: Router, useValue: router },
       ]
     }).compileComponents();
 
@@ -25,6 +31,7 @@ describe('AppComponent', () => {
     loginForm = fixture.componentInstance;
     store = TestBed.inject(Store) as MockStore<{ login: LoginState }>;
     spyOn(store, 'dispatch').and.callThrough();
+    spyOn(router, 'navigate');
   });
 
   it('should create the loginForm', () => {
@@ -60,4 +67,16 @@ describe('AppComponent', () => {
         expect(fixture.nativeElement.querySelector('.login-pending')).toBeDefined();
     });
   });
+
+  describe('when login succeeds', () => {
+    beforeEach(() => {
+      store.setState({
+        login: { loginPending: false, error: false, success: true }
+      })
+    });
+
+    it('should navigate to the home page', () => {
+      expect(router.navigate).toHaveBeenCalledWith(['']);
+    });
+  })
 });

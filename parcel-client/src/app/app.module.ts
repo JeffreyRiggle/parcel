@@ -21,6 +21,7 @@ import { HomePageComponent } from './pages/homePage.component';
 @NgModule({
   declarations: [
     AppComponent,
+    // TODO see if we can break this into a feature module for login
     LoginFormComponent,
     LoginPageComponent,
     CreateAccountPageComponent,

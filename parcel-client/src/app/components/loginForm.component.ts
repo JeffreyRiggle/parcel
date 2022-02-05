@@ -1,4 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { login } from '../data/actions/login.actions';
@@ -16,7 +17,7 @@ export class LoginFormComponent implements OnDestroy {
   public hasError: boolean;
   private loginSubscription: Subscription;
 
-  constructor(private store: Store<{ login: LoginState}>) {
+  constructor(private store: Store<{ login: LoginState}>, private router: Router) {
     this.password = '';
     this.userName = '';
     this.loginPending = false;
@@ -25,6 +26,9 @@ export class LoginFormComponent implements OnDestroy {
     this.loginSubscription = store.select('login').subscribe((login: LoginState) => {
       this.loginPending = login.loginPending;
       this.hasError = login.error;
+      if (login.success) {
+        this.router.navigate(['']);
+      }
     });
   }
 
