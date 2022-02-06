@@ -19,7 +19,7 @@ public class AccountController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<UserAccount> CreateAccount(UserAccountRequest request)
+    public ActionResult<UserAccount> createAccount(UserAccountRequest request)
     {
         try
         {
@@ -28,6 +28,20 @@ public class AccountController : ControllerBase
         catch (ObjectAlreadyExistsException e)
         {
             return BadRequest(new { error = e.Message, errorCode = 1 });
+        }
+    }
+
+    [HttpPost("login")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public ActionResult<TokenResult> login(LoginRequest request)
+    {
+        try
+        {
+            return new TokenResult{ Token = _dao.login(request) };
+        } catch (Exception e)
+        {
+            return Unauthorized(new { error = e.Message, errorCode = 1});
         }
     }
 }

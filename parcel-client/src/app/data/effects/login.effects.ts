@@ -13,9 +13,15 @@ export class LoginEffects {
     
     login = createEffect(() => this.actions.pipe(
         ofType(LoginFormLoginActionType),
-        mergeMap(() => this.loginSerivce.login().pipe(
-            map(result => ({ type: LoginAPILoginSuccessActionType })),
-            catchError(() => of({ type: LoginAPILoginFailedActionType }))
+        mergeMap((action: any) => this.loginSerivce.login({
+            userName: action.userName,
+            password: action.password,
+        }).pipe(
+            map(() => ({ type: LoginAPILoginSuccessActionType })),
+            catchError((e) => {
+                console.error(e);
+                return of({ type: LoginAPILoginFailedActionType })
+            })
         ))
     ));
 }

@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
+import { LoginAction } from "../data/actions/login.actions";
 
 @Injectable({
     providedIn: 'root'
@@ -7,8 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class LoginService {
     constructor(private http: HttpClient) {}
 
-    login() {
-        // hack for now
-        return this.http.post('/api/v1/login', {});
+    login(request: LoginAction) {
+        return this.http.post('/api/account/login', request);
     }
 }

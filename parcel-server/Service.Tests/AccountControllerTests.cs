@@ -11,7 +11,7 @@ namespace Service.Tests
     public class AccountController_CreateUser
     {
         [Fact]
-        public void CreateUser_Should_ReturnUser()
+        public void createUser_Should_ReturnUser()
         {
             var mockLogger = new Mock<ILogger<AccountController>>();
             var mockDao = new Mock<IUserAccountDAO>();
@@ -26,7 +26,7 @@ namespace Service.Tests
             });
 
             var controller = new AccountController(mockLogger.Object, mockDao.Object);
-            var result = controller.CreateAccount(
+            var result = controller.createAccount(
                 new UserAccountRequest {
                     UserName = "FooUser",
                     FirstName = "Foo",
@@ -40,14 +40,14 @@ namespace Service.Tests
         }
 
         [Fact]
-        public void CreateUser_Should_ReturnFailure_When_UserExists()
+        public void createUser_Should_ReturnFailure_When_UserExists()
         {
             var mockLogger = new Mock<ILogger<AccountController>>();
             var mockDao = new Mock<IUserAccountDAO>();
             mockDao.Setup(s => s.addAccount(It.IsAny<UserAccountRequest>())).Throws(new ObjectAlreadyExistsException("FooUser"));
 
             var controller = new AccountController(mockLogger.Object, mockDao.Object);
-            var result = controller.CreateAccount(
+            var result = controller.createAccount(
                 new UserAccountRequest {
                     UserName = "FooUser",
                     FirstName = "Foo",
@@ -58,6 +58,45 @@ namespace Service.Tests
             );
 
             Assert.True((result.Result as ObjectResult)?.StatusCode == 400, "It should return a bad request error");
+        }
+    }
+
+    public class AccountController_Login
+    {
+        [Fact]
+        public void successfull_Login_Should_ReturnToken()
+        {
+            var mockLogger = new Mock<ILogger<AccountController>>();
+            var mockDao = new Mock<IUserAccountDAO>();
+            mockDao.Setup(s => s.login(It.IsAny<LoginRequest>())).Returns("mockToken");
+
+            var controller = new AccountController(mockLogger.Object, mockDao.Object);
+            var result = controller.login(
+                new LoginRequest {
+                    UserName = "FooUser",
+                    Password = "Secure"
+                }
+            );
+
+            Assert.True(result.Value.Token == "mockToken", "It should have the correct token");
+        }
+
+        [Fact]
+        public void failed_Login_Should_ReturnFailure_When_Validation_Fails()
+        {
+            var mockLogger = new Mock<ILogger<AccountController>>();
+            var mockDao = new Mock<IUserAccountDAO>();
+            mockDao.Setup(s => s.login(It.IsAny<LoginRequest>())).Throws(new Exception("Username or password do not work"));
+
+            var controller = new AccountController(mockLogger.Object, mockDao.Object);
+            var result = controller.login(
+                new LoginRequest {
+                    UserName = "FooUser",
+                    Password = "Secure"
+                }
+            );
+
+            Assert.True((result.Result as ObjectResult)?.StatusCode == 401, "It should return an unathorized error");
         }
     }
 }

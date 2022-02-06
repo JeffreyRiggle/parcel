@@ -1,13 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { LoginService } from 'src/app/services/login.service';
 import { LoginEffects } from './login.effects';
-import { login } from '../actions/login.actions';
+import { login, LoginAPILoginFailedActionType, LoginAPILoginSuccessActionType } from '../actions/login.actions';
 
 class MockLoginService {
-    login = jasmine.createSpy('login').and.callFake(() => of(true))
+    login = jasmine.createSpy('login').and.callFake(() => of({
+        token: 'sometoken'
+    }))
 }
 
 describe('login effects', () => {
@@ -31,7 +33,7 @@ describe('login effects', () => {
         service = TestBed.inject(LoginService);
     });
 
-    describe('when effect is triggered', () => {
+    describe('when login succeeds', () => {
         let result: any;
         beforeEach((done) => {
             actions = of(login({ userName: 'foo', password: 'bar' }));
@@ -42,7 +44,31 @@ describe('login effects', () => {
         });
 
         it('should invoke the login api', () => {
-            expect(service.login).toHaveBeenCalled();
+            expect(service.login).toHaveBeenCalledWith({ userName: 'foo', password: 'bar' });
         });
+
+        it('should dispatch a login success action', () => {
+            expect(result).toEqual(jasmine.objectContaining({ type: LoginAPILoginSuccessActionType }));
+        })
+    });
+
+    describe('when login fails', () => {
+        let result: any;
+        beforeEach((done) => {
+            service.login = jasmine.createSpy('login').and.callFake(() => throwError(() => new Error('Bad Request')));
+            actions = of(login({ userName: 'foo', password: 'bar' }));
+            effects.login.subscribe(res => {
+                result = res;
+                done();
+            });
+        });
+
+        it('should invoke the login api', () => {
+            expect(service.login).toHaveBeenCalledWith({ userName: 'foo', password: 'bar' });
+        });
+
+        it('should dispatch a login failed action', () => {
+            expect(result).toEqual(jasmine.objectContaining({ type: LoginAPILoginFailedActionType }));
+        })
     });
 });

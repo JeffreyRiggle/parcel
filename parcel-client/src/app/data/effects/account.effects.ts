@@ -21,8 +21,11 @@ export class AccountEffects {
             email: action.email,
             password: action.password,
         }).pipe(
-            map(result => ({ type: CreateAccountAPISuccessActionType })),
-            catchError(() => of({ type: CreateAccountAPIFailedActionType }))
+            map(() => ({ type: CreateAccountAPISuccessActionType })),
+            catchError((e) => { 
+                console.error(e);
+                return of({ type: CreateAccountAPIFailedActionType }) ;
+            })
         ))
     ));
 }

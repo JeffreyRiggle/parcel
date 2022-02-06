@@ -6,9 +6,9 @@ public class UserAccountDAO : IUserAccountDAO
     private static IUserAccountDAO? _instance;
     private IList<UserAccount> _accounts;
 
-    public UserAccountDAO()
+    public UserAccountDAO(IList<UserAccount> accounts)
     {
-        _accounts = new List<UserAccount>();
+        _accounts = accounts;
     }
 
     public static IUserAccountDAO getInstance()
@@ -21,7 +21,7 @@ public class UserAccountDAO : IUserAccountDAO
         lock (_lockObj)
         {
             if (_instance == null) {
-                _instance = new UserAccountDAO();
+                _instance = new UserAccountDAO(new List<UserAccount>());
             }
 
             return _instance;
@@ -47,7 +47,7 @@ public class UserAccountDAO : IUserAccountDAO
     {
         if (!canCreateAccount(account))
         {
-            throw new ObjectAlreadyExistsException(account.UserName);
+            throw new ObjectAlreadyExistsException(account?.UserName ?? "unknown");
         }
 
         var creationTime = DateTime.Now;
@@ -55,6 +55,7 @@ public class UserAccountDAO : IUserAccountDAO
             UserName = account.UserName,
             FirstName = account.FirstName,
             LastName = account.LastName,
+            Password = account.Password,
             Email = account.Email,
             Gender = account.Gender,
             Created = creationTime,
@@ -63,5 +64,16 @@ public class UserAccountDAO : IUserAccountDAO
 
         _accounts.Add(retVal);
         return retVal;
+    }
+
+    public string login(LoginRequest request)
+    {
+        var account = _accounts.Where(a => a.UserName == request.UserName).FirstOrDefault();
+        if (account == null || account.Password != request.Password)
+        {
+            throw new Exception("Username does not exist or password is incorrect");
+        }
+        // TODO implement JWT tokens
+        return "faketoken";
     }
 }

@@ -1,4 +1,5 @@
 import { HttpClient } from "@angular/common/http";
+import { LoginAction } from "../data/actions/login.actions";
 import { LoginService } from "./login.service";
 
 describe('login service', () => {
@@ -13,12 +14,17 @@ describe('login service', () => {
     });
 
     describe('when login request is made', () => {
+        const request: LoginAction = {
+            userName: 'Foo',
+            password: 'Secure'
+        };
+
         beforeEach(() => {
-            service.login();
+            service.login(request);
         });
 
         it('should hit the correct endpoint', () => {
-            expect(postMock).toHaveBeenCalledWith('/api/v1/login', jasmine.any(Object));
+            expect(postMock).toHaveBeenCalledWith('/api/account/login', request);
         });
     });
 });
