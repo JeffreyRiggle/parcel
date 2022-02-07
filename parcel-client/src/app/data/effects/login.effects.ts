@@ -17,7 +17,7 @@ export class LoginEffects {
             userName: action.userName,
             password: action.password,
         }).pipe(
-            map(() => ({ type: LoginAPILoginSuccessActionType })),
+            map((result) => ({ type: LoginAPILoginSuccessActionType, token: result.token })),
             catchError((e) => {
                 console.error(e);
                 return of({ type: LoginAPILoginFailedActionType })

@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { TokenResult } from 'src/app/models/token';
 
 export const LoginFormLoginActionType = '[Login Form] Login';
 export const LoginAPILoginSuccessActionType = '[Login API] Login Success';
@@ -10,5 +11,5 @@ export interface LoginAction {
 }
 
 export const login = createAction(LoginFormLoginActionType, props<LoginAction>());
-export const loginSuccess = createAction(LoginAPILoginSuccessActionType);
+export const loginSuccess = createAction(LoginAPILoginSuccessActionType, props<TokenResult>());
 export const loginFailure = createAction(LoginAPILoginFailedActionType);

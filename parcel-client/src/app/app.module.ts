@@ -17,6 +17,10 @@ import { CreateAccountComponent } from './components/createAccount.component';
 import { accountReducer } from './data/reducers/account.reducer';
 import { AccountEffects } from './data/effects/account.effects';
 import { HomePageComponent } from './pages/homePage.component';
+import { UserEffects } from './data/effects/user.effects';
+import { userReducer } from './data/reducers/user.reducer';
+import { environment } from 'src/environments/environment';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -33,8 +37,12 @@ import { HomePageComponent } from './pages/homePage.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forRoot({ login: loginReducer, account: accountReducer }),
-    EffectsModule.forRoot([LoginEffects, AccountEffects])
+    StoreModule.forRoot({ login: loginReducer, account: accountReducer, user: userReducer }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
+    EffectsModule.forRoot([LoginEffects, AccountEffects, UserEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

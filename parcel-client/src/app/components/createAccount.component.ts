@@ -25,10 +25,11 @@ export class CreateAccountComponent implements OnDestroy {
     this.accountSubscription = store.select('account').subscribe((account: AccountState) => {
       this.hasError = account.error;
       if (account.accountCreated) {
-        this.router.navigate(['']);
+        this.router.navigate(['login']);
       }
     });
   }
+
   ngOnDestroy(): void {
     this.accountSubscription.unsubscribe();
   }
