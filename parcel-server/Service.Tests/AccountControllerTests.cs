@@ -8,10 +8,10 @@ using ParcelServer.Controllers;
 
 namespace Service.Tests
 {
-    public class AccountController_CreateUser
+    public class AccountControllerCreateUser
     {
         [Fact]
-        public void createUser_Should_ReturnUser()
+        public void createUserShouldReturnUser()
         {
             var mockLogger = new Mock<ILogger<AccountController>>();
             var mockDao = new Mock<IUserAccountDAO>();
@@ -40,7 +40,7 @@ namespace Service.Tests
         }
 
         [Fact]
-        public void createUser_Should_ReturnFailure_When_UserExists()
+        public void createUserShouldReturnFailureWhenUserExists()
         {
             var mockLogger = new Mock<ILogger<AccountController>>();
             var mockDao = new Mock<IUserAccountDAO>();
@@ -61,10 +61,10 @@ namespace Service.Tests
         }
     }
 
-    public class AccountController_Login
+    public class AccountControllerLogin
     {
         [Fact]
-        public void successfull_Login_Should_ReturnToken()
+        public void successfullLoginShouldReturnToken()
         {
             var mockLogger = new Mock<ILogger<AccountController>>();
             var mockDao = new Mock<IUserAccountDAO>();
@@ -78,11 +78,11 @@ namespace Service.Tests
                 }
             );
 
-            Assert.True(result.Value.Token == "mockToken", "It should have the correct token");
+            Assert.True(result.Value?.Token == "mockToken", "It should have the correct token");
         }
 
         [Fact]
-        public void failed_Login_Should_ReturnFailure_When_Validation_Fails()
+        public void failedLoginShouldReturnFailureWhenValidationFails()
         {
             var mockLogger = new Mock<ILogger<AccountController>>();
             var mockDao = new Mock<IUserAccountDAO>();

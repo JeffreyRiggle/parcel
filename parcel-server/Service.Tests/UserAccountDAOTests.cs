@@ -5,7 +5,7 @@ using ParcelServer;
 
 namespace Service.Tests
 {
-    public class UserAccountDAO_AddAccount
+    public class UserAccountDAOAddAccount
     {
         [Fact]
         public void addAccountShouldReturnUser()
@@ -44,7 +44,7 @@ namespace Service.Tests
         }
     }
 
-    public class UserAccountDAO_Login
+    public class UserAccountDAOLogin
     {
         [Fact]
         public void loginShouldPassWhenUserAndPasswordMatch()

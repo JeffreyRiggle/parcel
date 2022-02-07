@@ -5,7 +5,7 @@ using ParcelServer;
 
 namespace Service.Tests
 {
-    public class AppDAO_GetCategories
+    public class AppDAOGetCategories
     {
         [Fact]
         public void getCategoriesShouldReturnKnownCategories()
