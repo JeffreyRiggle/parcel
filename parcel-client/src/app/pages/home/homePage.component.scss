@@ -1,0 +1,19 @@
+.banner {
+    font-size: 24px;
+    padding: 32px;
+    text-align: center;
+
+    .login-link {
+        float: right;
+    }
+}
+
+.content-area {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+
+    .content-section {
+        margin: 8px 0;
+    }
+}

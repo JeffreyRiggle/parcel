@@ -2,8 +2,8 @@ import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { login } from '../data/actions/login.actions';
-import { LoginState } from '../data/reducers/login.reducer';
+import { login } from '../../data/actions/login.actions';
+import { LoginState } from '../../data/reducers/login.reducer';
 
 @Component({
   selector: 'login-form',

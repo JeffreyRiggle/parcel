@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoginFormComponent } from './loginForm.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { LoginState } from '../data/reducers/login.reducer';
-import { login, LoginFormLoginActionType, loginSuccess } from '../data/actions/login.actions';
+import { LoginState } from '../../data/reducers/login.reducer';
+import { LoginFormLoginActionType } from '../../data/actions/login.actions';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 

@@ -2,8 +2,8 @@ import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { createAccount } from '../data/actions/account.actions';
-import { AccountState } from '../data/reducers/account.reducer';
+import { createAccount } from '../../data/actions/account.actions';
+import { AccountState } from '../../data/reducers/account.reducer';
 
 @Component({
   selector: 'create-account',
