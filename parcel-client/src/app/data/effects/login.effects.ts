@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, mergeMap, map, of } from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
 import { LoginService } from 'src/app/services/login.service';
-import { LoginAPILoginFailedActionType, LoginAPILoginSuccessActionType, LoginFormLoginActionType } from '../actions/login.actions';
+import { loginFailure, LoginFormLoginActionType, loginSuccess } from '../actions/login.actions';
 
 @Injectable()
 export class LoginEffects {
@@ -13,14 +13,14 @@ export class LoginEffects {
     
     login = createEffect(() => this.actions.pipe(
         ofType(LoginFormLoginActionType),
-        mergeMap((action: any) => this.loginSerivce.login({
+        switchMap((action: any) => this.loginSerivce.login({
             userName: action.userName,
             password: action.password,
         }).pipe(
-            map((result) => ({ type: LoginAPILoginSuccessActionType, token: result.token })),
+            map((result) => loginSuccess({ token: result.token })),
             catchError((e) => {
                 console.error(e);
-                return of({ type: LoginAPILoginFailedActionType })
+                return of(loginFailure());
             })
         ))
     ));

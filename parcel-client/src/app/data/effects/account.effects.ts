@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, mergeMap, map, of } from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
 import { AccountService } from 'src/app/services/account.service';
-import { CreateAccountActionType, CreateAccountAPIFailedActionType, CreateAccountAPISuccessActionType } from '../actions/account.actions';
+import { CreateAccountActionType, createAccountFailure, createAccountSuccess } from '../actions/account.actions';
 
 @Injectable()
 export class AccountEffects {
@@ -13,7 +13,7 @@ export class AccountEffects {
     
     createAccount = createEffect(() => this.actions.pipe(
         ofType(CreateAccountActionType),
-        mergeMap((action: any) => this.accountService.createAccount({
+        switchMap((action: any) => this.accountService.createAccount({
             userName: action.userName,
             firstName: action.firstName,
             lastName: action.lastName,
@@ -21,10 +21,10 @@ export class AccountEffects {
             email: action.email,
             password: action.password,
         }).pipe(
-            map(() => ({ type: CreateAccountAPISuccessActionType })),
+            map(createAccountSuccess),
             catchError((e) => { 
                 console.error(e);
-                return of({ type: CreateAccountAPIFailedActionType }) ;
+                return of(createAccountFailure({ errorReason: e.message}));
             })
         ))
     ));

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { mergeMap, of } from 'rxjs';
+import { concatMap, of } from 'rxjs';
 import { LoginAPILoginSuccessActionType } from '../actions/login.actions';
-import { LoginAPITokenActionType } from '../actions/user.actions';
+import { setToken } from '../actions/user.actions';
 
 @Injectable()
 export class UserEffects {
@@ -12,6 +12,6 @@ export class UserEffects {
     
     handleToken = createEffect(() => this.actions.pipe(
         ofType(LoginAPILoginSuccessActionType),
-        mergeMap((action: any) => of({ type: LoginAPITokenActionType, token: action.token }))
+        concatMap((action: any) => of(setToken({ token: action.token })))
     ));
 }
