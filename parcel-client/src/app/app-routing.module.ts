@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginPageComponent } from './pages/login/loginPage.component';
-import { CreateAccountPageComponent } from './pages/createAccount/createAccountPage.component';
-import { HomePageComponent } from './pages/home/homePage.component';
+import { HomePageComponent } from './root/pages/home/homePage.component';
+import { CategorySearchComponent } from './root/pages/categorySearch/categorySearch.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
-  { path: 'login', component: LoginPageComponent },
-  { path: 'create-account', component: CreateAccountPageComponent },
+  { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
+  { path: 'create-account', loadChildren: () => import('./createAccount/createAccount.module').then(m => m.CreateAccountModule) },
+  { path: 'category/:id', component: CategorySearchComponent },
 ];
 
 @NgModule({
