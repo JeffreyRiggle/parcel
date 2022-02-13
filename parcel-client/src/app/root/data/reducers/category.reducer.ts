@@ -1,7 +1,6 @@
-import { Action, createReducer, on } from '@ngrx/store';
-import { ActionType } from '@ngrx/store/src/models';
+import { createReducer, on } from '@ngrx/store';
 import { CategoriesResult } from 'src/app/models/categories';
-import { loadCategories, loadCategoryFailure, loadCategorySuccess } from '../actions/category.actions';
+import { CatergoryActions, loadCategories, loadCategoryFailure, loadCategorySuccess } from '../actions/category.actions';
 
 export interface CategoryState {
     categories: string[];
@@ -22,6 +21,6 @@ const reducer = createReducer(
     on(loadCategoryFailure, (state: CategoryState) => ({ ...state, loadingCategories: false, error: true }))
 );
 
-export function categoryReducer(state: CategoryState | undefined, action: Action | ActionType<CategoriesResult>) {
+export function categoryReducer(state: CategoryState | undefined, action: CatergoryActions) {
     return reducer(state, action);
 }

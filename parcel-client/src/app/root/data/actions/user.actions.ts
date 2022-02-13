@@ -7,3 +7,4 @@ export interface TokenAction {
 }
 
 export const setToken = createAction(LoginAPITokenActionType, props<TokenAction>());
+export type UserActions = ReturnType<typeof setToken>;

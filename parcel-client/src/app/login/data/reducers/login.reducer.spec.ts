@@ -6,7 +6,11 @@ describe('login reducer', () => {
 
     describe('when login request is made', () => {
         beforeEach(() => {
-            result = loginReducer(undefined, { type: LoginFormLoginActionType });
+            result = loginReducer(undefined, {
+                type: LoginFormLoginActionType,
+                userName: 'tester',
+                password: 'Secure',
+            });
         });
 
         it('should set the loading state', () => {
@@ -15,7 +19,10 @@ describe('login reducer', () => {
 
         describe('when api result is successful', () => {
             beforeEach(() => {
-                result = loginReducer(result, { type: LoginAPILoginSuccessActionType });
+                result = loginReducer(result, {
+                    type: LoginAPILoginSuccessActionType,
+                    token: 'sometoken'
+                });
             });
 
             it('should no longer be loading', () => {

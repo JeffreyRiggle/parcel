@@ -7,7 +7,15 @@ describe('account reducer', () => {
 
     describe('when create request is made', () => {
         beforeEach(() => {
-            result = accountReducer(undefined, { type: CreateAccountActionType });
+            result = accountReducer(undefined, {
+                type: CreateAccountActionType,
+                userName: 'tester',
+                firstName: 'test',
+                lastName: 'user',
+                email: 'a@b.c',
+                password: 'Secure',
+                gender: 'M',
+            });
         });
 
         it('should set the loading state', () => {
@@ -30,7 +38,10 @@ describe('account reducer', () => {
 
         describe('when api result is a failure', () => {
             beforeEach(() => {
-                result = accountReducer(result, { type: CreateAccountAPIFailedActionType });
+                result = accountReducer(result, {
+                    type: CreateAccountAPIFailedActionType,
+                    errorReason: 'Name already in use'
+                });
             });
 
             it('should no longer be loading', () => {

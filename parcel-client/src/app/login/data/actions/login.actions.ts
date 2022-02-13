@@ -13,3 +13,4 @@ export interface LoginAction {
 export const login = createAction(LoginFormLoginActionType, props<LoginAction>());
 export const loginSuccess = createAction(LoginAPILoginSuccessActionType, props<TokenResult>());
 export const loginFailure = createAction(LoginAPILoginFailedActionType);
+export type LoginActions = ReturnType<typeof login> | ReturnType<typeof loginSuccess> | ReturnType<typeof loginFailure>;

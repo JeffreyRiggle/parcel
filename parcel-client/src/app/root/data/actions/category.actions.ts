@@ -8,3 +8,4 @@ export const CategoryLoadFailureActionType = '[Category API] Load Category Faile
 export const loadCategories = createAction(LoadCategoryActionType);
 export const loadCategorySuccess = createAction(CategoryLoadSuccessActionType, props<CategoriesResult>());
 export const loadCategoryFailure = createAction(CategoryLoadFailureActionType);
+export type CatergoryActions = ReturnType<typeof loadCategories> | ReturnType<typeof loadCategorySuccess> | ReturnType<typeof loadCategoryFailure>;

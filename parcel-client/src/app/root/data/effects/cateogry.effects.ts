@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, exhaustMap } from 'rxjs';
 import { CategoryService } from '../../services/category.service';
-import { LoadCategoryActionType, loadCategoryFailure, loadCategorySuccess } from '../actions/category.actions';
+import { CatergoryActions, LoadCategoryActionType, loadCategoryFailure, loadCategorySuccess } from '../actions/category.actions';
 
 @Injectable()
 export class CategoryEffects {
     constructor(
-        private actions: Actions,
+        private actions: Actions<CatergoryActions>,
         private categoryService: CategoryService
     ) {}
     

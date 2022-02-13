@@ -20,3 +20,4 @@ export interface CreateActionFailed {
 export const createAccount = createAction(CreateAccountActionType, props<CreateAccountAction>());
 export const createAccountSuccess = createAction(CreateAccountAPISuccessActionType);
 export const createAccountFailure = createAction(CreateAccountAPIFailedActionType, props<CreateActionFailed>());
+export type AccountActions = ReturnType<typeof createAccount> | ReturnType<typeof createAccountSuccess> | ReturnType<typeof createAccountFailure>;

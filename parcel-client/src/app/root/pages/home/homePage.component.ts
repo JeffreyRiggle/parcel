@@ -16,7 +16,7 @@ export class HomePageComponent implements OnDestroy {
   public token: string = '';
   private userSubscription: Subscription;
 
-  constructor(store: Store<{ user: UserState}>) {
+  constructor(store: Store<{ user: UserState }>) {
     this.userSubscription = store.select('user').subscribe((user: UserState) => {
       this.token = user.token;
     });

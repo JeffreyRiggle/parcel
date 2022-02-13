@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { login, loginFailure, loginSuccess } from '../actions/login.actions';
+import { login, LoginActions, loginFailure, loginSuccess } from '../actions/login.actions';
 
 export interface LoginState {
     loginPending: boolean;
@@ -20,6 +20,6 @@ const reducer = createReducer(
     on(loginFailure, (state: LoginState) => ({ ...state, loginPending: false, error: true, success: false }))
 );
 
-export function loginReducer(state: LoginState | undefined, action: Action) {
+export function loginReducer(state: LoginState | undefined, action: LoginActions) {
     return reducer(state, action);
 }
