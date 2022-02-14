@@ -34,7 +34,7 @@ import { CategorySearchComponent } from './root/pages/categorySearch/categorySea
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forRoot({ user: userReducer, category: categoryReducer }),
+    StoreModule.forRoot({ user: userReducer as any, category: categoryReducer as any }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
