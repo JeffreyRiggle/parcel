@@ -1,35 +1,35 @@
-<div class="account-form">
+<form class="account-form" [formGroup]="createAccountForm">
     <div class="account-section">
         <label for="userName" class="account-label">User Name</label>
-        <input type="text" name="userName" required [(ngModel)]="userName" />
+        <input type="text" name="userName" formControlName="userName" />
     </div>
     <div class="account-section">
         <label for="firstName" class="account-label">First Name</label>
-        <input type="text" name="firstName" [(ngModel)]="firstName" />
+        <input type="text" name="firstName" formControlName="firstName" />
     </div>
     <div class="account-section">
         <label for="lastName" class="account-label">Last Name</label>
-        <input type="text" name="lastName" [(ngModel)]="lastName" />
+        <input type="text" name="lastName" formControlName="lastName" />
     </div>
     <div class="account-section">
         <label for="gender" class="account-label">Gender</label>
-        <input type="text" name="gender" [(ngModel)]="gender" />
+        <input type="text" name="gender" formControlName="gender" />
     </div>
     <div class="account-section">
         <label for="email" class="account-label">Email Address</label>
-        <input type="text" name="email" [(ngModel)]="email" />
+        <input type="text" name="email" formControlName="email" />
     </div>
     <div class="account-section">
         <label for="password" class="account-label">Password</label>
-        <input type="password" name="password" required [(ngModel)]="password" />
+        <input type="password" name="password" formControlName="password" />
     </div>
     <div class="account-section">
         <label for="confirmPassword" class="account-label">Confirm Password</label>
-        <input type="password" name="confirmPassword" required [(ngModel)]="confirmPassword" />
+        <input type="password" name="confirmPassword" formControlName="confirmPassword" />
     </div>
     <div class="submit-area">
-        <button (click)="createAccount()">Create Account</button>
+        <button (click)="createAccount()" [disabled]="createAccountForm.invalid">Create Account</button>
         <a routerLink="/login">Back to login</a>
     </div>
     <div *ngIf="hasError" class="account-creation-failed">Failed to create account</div>
-</div>
+</form>

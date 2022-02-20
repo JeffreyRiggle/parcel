@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateAccountComponent } from './components/createAccount/createAccount.component';
 import { CreateAccountPageComponent } from './pages/createAccount/createAccountPage.component';
@@ -21,7 +21,8 @@ import { CreateAccountRoutingModule } from './createAccount-routing.module';
     HttpClientModule,
     CreateAccountRoutingModule,
     StoreModule.forFeature('account', accountReducer),
-    EffectsModule.forFeature([AccountEffects])
+    EffectsModule.forFeature([AccountEffects]),
+    ReactiveFormsModule,
   ]
 })
 export class CreateAccountModule { }
