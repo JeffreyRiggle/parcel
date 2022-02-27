@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -35,7 +35,7 @@ export class CreateAccountComponent implements OnDestroy {
       lastName: '',
       gender: '',
       password: ['', [Validators.required]],
-      confirmPassword: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required, , this.validateMatchingPassword(() => this.password)]],
       email: ['', [Validators.required, Validators.email]],
     });
   }
@@ -53,6 +53,13 @@ export class CreateAccountComponent implements OnDestroy {
       email: this.email?.value,
       password: this.password?.value,
     }));
+  }
+
+  private validateMatchingPassword(confirmControl: () => AbstractControl | null): ValidatorFn {
+    return (control: AbstractControl) => {
+      const matching = control?.value === confirmControl()?.value;
+      return !matching ? { matching: true } : null;
+    }
   }
 
   private get userName() {
