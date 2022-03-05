@@ -1,4 +1,4 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { AccountActions, createAccount, createAccountFailure, createAccountSuccess, CreateActionFailed } from '../actions/account.actions';
 
 export interface AccountState {

@@ -20,15 +20,17 @@ public class AppController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public ActionResult<CategoriesResult> getCategories()
     {
-        try
-        {
-            return new CategoriesResult {
-                Results = _dao.getCategories()
-            };
-        }
-        catch (ObjectAlreadyExistsException e)
-        {
-            return BadRequest(new { error = e.Message, errorCode = 1 });
-        }
+        return new CategoriesResult {
+            Results = _dao.getCategories()
+        };
+    }
+
+    [HttpGet("categories/{categoryId}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public ActionResult<AppsResult> getAppsByCategory(string categoryId)
+    {
+        return new AppsResult {
+            Results = _dao.getByCategory(categoryId)
+        };
     }
 }

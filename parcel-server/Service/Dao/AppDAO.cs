@@ -23,4 +23,9 @@ public class AppDAO : IAppDAO
     {
         return _apps.Select(a => a.Category).Where(a => a != null).ToList();
     }
+
+    public IList<AppMetadata> getByCategory(string category)
+    {
+        return _apps.Where(a => category.Equals(a.Category, StringComparison.OrdinalIgnoreCase)).ToList();
+    }
 }
