@@ -19,6 +19,9 @@ import { categoryReducer } from './root/data/reducers/category.reducer';
 import { CategoryEffects } from './root/data/effects/cateogry.effects';
 import { CategoryItemComponent } from './root/components/categoryItem/categoryItem.component';
 import { CategorySearchComponent } from './root/pages/categorySearch/categorySearch.component';
+import { AppListComponent } from './root/components/appList/appList.component';
+import { appsReducer } from './root/data/reducers/app.reducer';
+import { AppEffects } from './root/data/effects/app.effects';
 
 @NgModule({
   declarations: [
@@ -28,18 +31,19 @@ import { CategorySearchComponent } from './root/pages/categorySearch/categorySea
     CategoryListComponent,
     CategoryItemComponent,
     CategorySearchComponent,
+    AppListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forRoot({ user: userReducer as any, category: categoryReducer as any }),
+    StoreModule.forRoot({ user: userReducer as any, category: categoryReducer as any, apps: appsReducer as any }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([UserEffects, CategoryEffects])
+    EffectsModule.forRoot([UserEffects, CategoryEffects, AppEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
